@@ -1,0 +1,117 @@
+1º -> Instalação	
+	* Python Versão 3.11.4 
+	* pip --version Gerenciador de pacote do python (versão 23.1.2)
+	
+2º -> Instalação do RobotFramework:
+    - pip install robotframework
+	- robot --version (versão 6.1.1)
+    - python -m robot --version (Em caso de ERRO na intalação do robotframework)
+
+3º -> Criar pasta Yodapp
+	# cd\QAx\projects\
+	    - mkdir yodapp
+	acessar a pasta e fazer o dowload do arquivo APK e extrair esse arquivo dentro de uma nova pasta chamada "app"
+
+4º -> Instalações do Appium dentro do projeto e do doctor:
+    - cd\QAx\projects\yodapp
+      *	npm init -> preencher as questoes
+	  dar Enter até chegar na opção AUTHOR
+		### depois proximo comando ###
+		      npm i appium@2.0.1
+        depois de finalizado colocar o servidor do appium no ar com o comando:
+		npx appium
+
+5º -> Abri o Appium Inspector
+      - Colocar os capabilits e rodar o emulador
+	  - vai dar erro no serviço, ai é so instalar o UIautomator2
+	  - npx appium driver install uiautomator2
+	  - Volta a colocar o Servidor do Appium no ar
+
+
+6º -> Mensagem de Notificação no Emulador
+	  - autoGrantpermissions = True
+	  Startcession
+	  
+7º -> Renomeando a pasta "Yodapp" para "yodapp-robot"
+      - O seridor do Appium deve rodar dentro da pasta "yodapp-robot"
+	  ### IMPORTANTE: ###
+		Caso o Appium não execute na pasta aonde o APK foi criada exemplo: Pasta "yodapp" agora renomeada para yodapp-robot
+		use o seguinte comando:
+		npx appium driver uninstall uiautomator2
+		depois intalaçãp normal do appium
+		npx appium driver install uiautomator2
+		
+
+8º -> Abri o VS.Code 
+       Com cmd navergar até a pasta cd\QAx\projects\yodapp-robot e abri o VS.Code
+	   Na pasta raiz do projeto criar a pasta "Tests" e dentro dela o arquivo "home.robot"
+	   Dentro do arquivo home.robot colocar os capabilits
+	   Depois fazer a instalção da biblioteca do appium:
+		pip install --upgrade robotframework-appiumlibrary
+
+
+
+###################################################################################################
+
+robot -d ./logs tests/home.robot
+
+Icones do VS.Code:
+    - Material Icon Theme - Icones de pastas e arquivos
+    - One Dark Pro - Tema de Fundo
+
+Plugins:
+Intalação do plugin RobotframeWork no VSCode
+
+Instalações:
+    - Windows Terminal
+    - github.com/appium/appium-inspector
+       * npx appium (colocar o servidor do appium no ar)
+    - npx appium driver install uiautomator2
+    - versão mais atualizada do Python 3.11.4
+    
+    - npm i appium-doctor ( na mesma pasta "appium-qax")
+    - npx appium-doctor --android ( na mesma pasta "appium-qax")
+    - npx appium driver install uiautomator2 (dentro do projeto yodapp)
+
+Verções:
+    - appium@2.0.1 ->mudar a versão do Appium
+    - versão mais atualizada do Python 3.11.4
+
+Criação de pastas:
+    No cmd do win
+        cd \ Nome_Pasta (para localizar a pasta do projeto)
+        mkdir QAx (primeira pasta do projeto)
+        mkdir apps (primeira pasta)
+        projects (segunda pasta)
+		
+		
+- Abrindo o Emulador via linha de Comando fora da pasta do projeto
+    cd %ANDROID_HOME%
+    cd tools
+    emulator @Nome_Device
+    emulator -list-avds (lista todos os dispositivos na maquina)
+
+Comandos:
+    npx playwright test --ui
+    npx playwright test --headed
+    npx appium driver list --installed (lista de devices instalados)
+    npx appium (para subir o servidor do Appium)
+
+
+###################################################################################################
+
+
+
+npx appium driver install uiautomator2
+
+depois dentro pa pasta yodapp-boto fazer a instalação do robotframework
+pip install --upgrade robotframework-appiumlibrary
+
+{
+  "platformName": "Android",
+  "appium:deviceName": "Android Emulator",
+  "appium:automationName": "UIautomator2",
+  "appium:app": "C:\\QAx\\QAx\\projects\\yodapp-robot\\app\\yodapp-beta.apk",
+  "appium:udid": "Yodapp-5554",
+  "appium:autoGrantpermissions": false
+}
