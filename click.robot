@@ -1,10 +1,6 @@
 *** Settings ***
 
-Library    AppiumLibrary
-
-*** Variables ***
-${START}    QAX
-
+Resource     ../resources/base.resource
 
 *** Test Cases ***
 Deve realizar um clique simples
@@ -19,41 +15,19 @@ Deve realizar um clique simples
 
     Close session
 
+Deve realizar um clique Longo
+    [Tags]    long
 
-*** Keywords ***
-Start session
-    Open Application       http://localhost:4723
-    ...                    platformName=Android
-    ...                    deviceName=Android Emulator
-    ...                    automationName=UIAutomator2
-    ...                    app=${EXECDIR}/app/yodapp-beta.apk
-    ...                    udid=emulator-5554
-    ...                    autoGrantPermissions=true
-    
-Get started
-    Wait Until Page Contains    ${START}     5
-    Click Text                  ${START} 
+    Start session
+    Get started
+    Navigate to        Clique em Botões
+    Go to item         Clique longo    Botão clique longo
 
-Navigate to
-    [Arguments]        ${item_text}
-    ${hambuger}  Set Variable   xpath=//android.widget.ImageButton[@content-desc="Open navigation drawer"]
-
-    Wait Until Element Is Visible  ${hambuger}     5
-    Click Element                  ${hambuger}   
-
-    
-    ${menu_item}    Set Variable     xpath=//*[@resource-id="com.qaxperience.yodapp:id/navView"]//*[@text="${item_text}"]
-
-    Wait Until Element Is Visible      ${menu_item}     5
-    Click Element                      ${menu_item}   
-
- Go to item
-    [Arguments]    ${item}    ${checkpoit}
-    Wait Until Page Contains    ${item}     5
-    Click Text                  ${item}
-    Wait Until Page Contains    ${checkpoit}
+    ${locator}        Set Variable     id=com.qaxperience.yodapp:id/long_click    
+    ${positions}       Get Element Location     ${locator}
 
 
-    
-Close session
-    Close Application
+    Tap With Positions          1000     ${${positions}[x],  ${positions}[y]}   
+    Wait Until Page Contains    Isso é um clique longo
+
+    Close session
